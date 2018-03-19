@@ -2722,10 +2722,10 @@ for the same resource (i.e. the same access/download target).</p>
 		  <!--
 			<a href="#RID5"></a>
 		  -->
-		  </p>		  		  
+		  </p>
 		</section>
 		 <section id="ID51" class="usecase">
-		  <h2>Relaxing axiomatization of reusable properties [ID51]</h2>
+		  <h2>Relax axiomatization of reusable properties [ID51]</h2>
 		  <p class="contributor">Simon Cox, Andrea Perego</p>
 		  <p class="tags">
 			<span class="tag class_dcat">dcat</span>
@@ -2738,23 +2738,40 @@ for the same resource (i.e. the same access/download target).</p>
 		  <div class="visible">
 			<p class="description">
 			  <p>
-				The axiomatzation of RDF properties may restrict their re-usability, i.e.
-				an explicit specification of an <code>rdfs:domain</code> or <code>rdfs:range</code>
-				restricts the usage of the property to instances of that classes only. On the other side, 
-			    usage of those properties may result in unintended entailment implying, that the subject
-			    or object of a statement is a member of the property domain or range class respectively.
+				The axiomatization of RDF properties may restrict their re-usability. Specification of a
+        <code>rdfs:domain</code> or <code>rdfs:range</code> ties the use of the property to
+        instances of that class. From the other side, use of properties with global domain or range
+        constraints may result in unintended entailments.
 			  </p>
 			  <p>
 				As an example, the property <code>dcat:contactPoint</code> plays an important role for data consumers,
 				since it indcates a dedicated point of contact to ask questions or report issues about a resource.
-				So far, the domain of the property was restricted to <code>dcat:Dataset</code> instances,
-				preventing its consistent usage with other types of related resources (e.g., <code>dcat:Catalog</code>,
-				or <code>dcat:CatalogRecord</code>).	
+				In the original DCAT specification the domain was restricted to <code>dcat:Dataset</code> instances,
+				preventing its consistent use with other types of resource for which a Contact Point should be provided
+        (e.g., <code>dcat:Catalog</code>, or <code>dcat:CatalogRecord</code>).	This limitation on the use of
+        <code>dcat:contactPoint</code> appears to be an unintended consequence of the application of a particular
+        modeling style, in which the initially identified use of each property was routinely solidified by
+        adding global domain and range constraints.
 			  </p>
+        <p>
+           Some domain and range constraints on DCAT properties are important, where they support the core
+           DCAT framework linking Catalogs, Datasets and Distributions. But on most other DCAT properties the
+           global constraints are probably unnecessary, particularly where they prevent re-use of properties
+           in the context of other classes. While the properties might have been originally imagined to apply
+           in a specific context, there is no utility in the axiomatization, so no reason it should be retained.
+           The consequence of retaining unnecessary global domain and range constraints is to effectively disallow
+           use of DCAT properties in the context of any other class, which may result in
+           (i) not being able to express some useful information (ii) inconsistent accretion of new properties
+           by users (iii) inconsistent use of DCAT properties as currently defined.
+           This should be avoided.
+        </p>
 			  <p>
-				By weaking the axiomatization of a property a part of guidance on its appropriate, intended usage is lost
-				and should be compensated by apporpiate means, e.g. a profile definition, informal documentation or formal
-				validity criteria (SHACL rules). 
+          Relaxing the axiomatization of DCAT properties has no practical consequences for legacy deployments:
+          no new inconsistencies are introduced, and we are not aware of any catalogs in which reasoning is an
+          important part of their operation.
+				Nevertheless, by weaking the axiomatization of a property a part of guidance on its intended usage may be lost.
+				This may be compensated by more appropriate means, e.g. a profile definition, informal documentation or formal
+				validity criteria (SHACL rules).
 			  </p>
 			</p>
 		  </div>
